@@ -1,6 +1,15 @@
 import type { AuthUser, CrudAction, RolePermissions } from '../types/auth';
 
-export const CRUD_ACTIONS: CrudAction[] = ['create', 'read', 'update', 'delete'];
+export const CRUD_ACTIONS: CrudAction[] = [
+  'create',
+  'read',
+  'update',
+  'delete',
+  'approve',
+  'release',
+  'execute',
+  'export',
+];
 
 export const MODULE_LABELS: Record<string, string> = {
   dashboard: 'Dashboard',
@@ -19,13 +28,6 @@ export const NAV_MODULES = [
   { moduleId: 'dashboard', label: 'Home', screen: 'Home' },
   { moduleId: 'users', label: 'Users', screen: 'Users' },
   { moduleId: 'roles', label: 'Roles', screen: 'Roles' },
-  { moduleId: 'leads', label: 'Leads', screen: 'ModuleRecords' },
-  { moduleId: 'customers', label: 'Customers', screen: 'ModuleRecords' },
-  { moduleId: 'products', label: 'Products', screen: 'ModuleRecords' },
-  { moduleId: 'orders', label: 'Orders', screen: 'ModuleRecords' },
-  { moduleId: 'invoices', label: 'Invoices', screen: 'ModuleRecords' },
-  { moduleId: 'expenses', label: 'Expenses', screen: 'ModuleRecords' },
-  { moduleId: 'documents', label: 'Documents', screen: 'ModuleRecords' },
 ] as const;
 
 export function getModuleActions(

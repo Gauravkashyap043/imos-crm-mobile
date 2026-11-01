@@ -15,6 +15,9 @@ export function HomeScreen() {
         {user?.fullName} · {user?.role}
       </Text>
       <Text style={styles.meta}>Modules: {modules}</Text>
+      <Text style={styles.note}>
+        Leads, orders, and stock live on the web CRM. This app is for sign-in, users, and roles until typed field screens ship.
+      </Text>
       <Pressable style={styles.btn} onPress={() => refresh()}>
         <Text style={styles.btnText}>Refresh /me</Text>
       </Pressable>
@@ -29,6 +32,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#0f1419', padding: 20 },
   title: { fontSize: 28, color: '#e8eef4', fontWeight: '600', marginBottom: 8 },
   meta: { color: '#8fa3b8', marginBottom: 6 },
+  note: { color: '#8fa3b8', marginTop: 12, lineHeight: 20 },
   btn: {
     marginTop: 16,
     backgroundColor: '#3d9a7a',

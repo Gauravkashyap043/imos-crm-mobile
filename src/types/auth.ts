@@ -1,4 +1,12 @@
-export type CrudAction = 'create' | 'read' | 'update' | 'delete';
+export type CrudAction =
+  | 'create'
+  | 'read'
+  | 'update'
+  | 'delete'
+  | 'approve'
+  | 'release'
+  | 'execute'
+  | 'export';
 
 export interface ModulePermission {
   moduleId: string;

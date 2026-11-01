@@ -2,29 +2,17 @@ import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ActivityIndicator, Pressable, ScrollView, Text, View } from 'react-native';
 import { useAuth } from '../context/AuthContext';
-import { canAccessModule, MODULE_LABELS } from '../config/roles';
+import { canAccessModule } from '../config/roles';
 import { AuthScreen } from '../screens/AuthScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { UserManagementScreen } from '../screens/UserManagementScreen';
 import { RoleManagementScreen } from '../screens/RoleManagementScreen';
-import { ModuleRecordsScreen } from '../screens/ModuleRecordsScreen';
-
-const BUSINESS_MODULES = [
-  'leads',
-  'customers',
-  'products',
-  'orders',
-  'invoices',
-  'expenses',
-  'documents',
-] as const;
 
 export type RootStackParamList = {
   Auth: undefined;
   Home: undefined;
   Users: undefined;
   Roles: undefined;
-  ModuleRecords: { moduleId: string };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -63,27 +51,9 @@ function HeaderLinks({
             <Text style={{ color: '#3d9a7a' }}>Roles</Text>
           </Pressable>
         ) : null}
-        {BUSINESS_MODULES.filter((id) =>
-          canAccessModule(user.role, id, user.rolePermissions)
-        ).map((id) => (
-          <Pressable
-            key={id}
-            onPress={() => navigation.navigate('ModuleRecords', { moduleId: id })}
-          >
-            <Text style={{ color: '#3d9a7a' }}>{MODULE_LABELS[id] ?? id}</Text>
-          </Pressable>
-        ))}
       </View>
     </ScrollView>
   );
-}
-
-function ModuleRecordsRoute({
-  route,
-}: {
-  route: { params: { moduleId: string } };
-}) {
-  return <ModuleRecordsScreen moduleId={route.params.moduleId} />;
 }
 
 export function RootNavigator() {
@@ -130,13 +100,6 @@ export function RootNavigator() {
                 options={{ title: 'Roles' }}
               />
             ) : null}
-            <Stack.Screen
-              name="ModuleRecords"
-              component={ModuleRecordsRoute}
-              options={({ route }) => ({
-                title: MODULE_LABELS[route.params.moduleId] ?? route.params.moduleId,
-              })}
-            />
           </>
         )}
       </Stack.Navigator>
